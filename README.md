@@ -172,10 +172,10 @@ The application uses Redis for data persistence with:
 
 ## 📊 Performance Comparison
 
-| Build Type | Image Size | Security | Health Checks | Build Time |
-|------------|------------|----------|---------------|------------|
-| Single-Stage | ~400MB | Root user | None | Fast |
-| Multi-Stage | ~200MB | Non-root | Included | Moderate |
+| Build Type | Image Size | Security | Health Checks |
+|------------|------------|----------|---------------|
+| Single-Stage | ~1.6GB | Root user | None |
+| Multi-Stage | ~300MB | Non-root | Included |
 
 ## 🧪 Testing
 
