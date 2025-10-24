@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docker Todo • Flask + Redis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div class="mx-auto max-w-2xl p-6">
+    <header class="mb-6">
+      <h1 class="text-3xl font-semibold tracking-tight">Docker Todo</h1>
+      <p class="text-slate-400 text-sm">Flask + Redis • Host: <span class="font-mono">{{ hostname }}</span></p>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mb-4 space-y-2">
+          {% for m in messages %}
+            <div class="rounded-xl bg-emerald-900/40 border border-emerald-600/40 px-4 py-2 text-emerald-200">
+              {{ m }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="mt-10 text-xs text-slate-500">
+      <p>Try the API: <code class="px-1 py-0.5 bg-slate-800 rounded">/api/todos</code> • Health: <code class="px-1 py-0.5 bg-slate-800 rounded">/health</code></p>
+    </footer>
+  </div>
+</body>
+</html>

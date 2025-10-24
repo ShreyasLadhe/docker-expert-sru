@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="{{ url_for('add_todo') }}" method="post" class="mb-5">
+  <div class="flex gap-2">
+    <input name="title" placeholder="Add a new todo…" autofocus
+           class="flex-1 rounded-xl bg-slate-900 border border-slate-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" />
+    <button class="rounded-xl bg-indigo-600 hover:bg-indigo-500 px-4 py-2 font-medium">Add</button>
+  </div>
+</form>
+
+<div class="rounded-2xl border border-slate-800 overflow-hidden">
+  {% if todos %}
+    <ul class="divide-y divide-slate-800">
+      {% for t in todos %}
+        <li class="flex items-center gap-3 p-3">
+          <form action="{{ url_for('toggle', todo_id=t.id) }}" method="post">
+            <button class="w-5 h-5 rounded border flex items-center justify-center
+                           {% if t.done %}bg-emerald-500 border-emerald-500{% else %}border-slate-500{% endif %}">
+              {% if t.done %}✓{% endif %}
+            </button>
+          </form>
+          <div class="flex-1">
+            <div class="font-medium {% if t.done %}line-through text-slate-500{% endif %}">
+              {{ t.title }}
+            </div>
+            <div class="text-xs text-slate-500">{{ t.created_at }}</div>
+          </div>
+          <form action="{{ url_for('delete', todo_id=t.id) }}" method="post">
+            <button class="text-slate-400 hover:text-rose-400">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="p-6 text-slate-400">No todos yet. Add one above!</div>
+  {% endif %}
+</div>
+
+<form action="{{ url_for('clear_completed') }}" method="post" class="mt-4 text-right">
+  <button class="text-sm text-slate-400 hover:text-slate-200">Clear completed</button>
+</form>
+
+{% endblock %}

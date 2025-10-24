@@ -1,0 +1,41 @@
+--------Running Locally--------
+
+Start Reddis first (brew serives start redis)
+
+python3 -m venv venv
+
+source venv/bin/activate (Linux and MacOS)
+venv\Scripts\activate (Windows)
+
+pip install -r requirements.txt
+
+export REDIS_HOST=localhost
+export REDIS_PORT=6379
+export FLASK_ENV=development
+export FLASK_APP=app/main.py
+export PORT=5004
+
+python -m app.main
+
+---------Docker Chunky Build--------
+
+docker build -f Dockerfile.chunky -t sr-demo-chunky:latest .
+
+docker images | grep sr-demo-chunky (Get Size)
+
+--------Docker Multi Stage build--------
+
+docker build -f Dockerfile.multistage -t sr-demo-lean:latest .
+
+docker images | egrep 'sr-demo-(lean|chunky)' (Compare side by side)
+
+--------Docker Compose Build--------
+
+docker compose up --build
+
+curl http://localhost:5005/
+curl http://localhost:5005/health
+curl http://localhost:5005/echo?msg=SRU
+curl http://localhost:5005/visits
+
+docker compose down -v

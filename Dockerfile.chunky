@@ -1,0 +1,14 @@
+# Big base with build tools and cache left in layers
+FROM python:3.12
+
+WORKDIR /app
+
+# Copy everything (less cache-friendly, pulls in junk)
+COPY . /app
+
+RUN pip install --upgrade pip \
+ && pip install -r requirements.txt
+
+# Expose and run as root (not ideal)
+EXPOSE 5005
+CMD ["python", "-m", "app.main"]
