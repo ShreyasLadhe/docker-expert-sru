@@ -1,6 +1,6 @@
 --------Running Locally--------
 
-Start Reddis first (brew serives start redis)
+Start Reddis first (brew services start redis)
 
 python3 -m venv venv
 
